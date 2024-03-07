@@ -27,7 +27,7 @@ You will need the following installed and ready on your computer beforehand:
 
 9. Where you able to login using the same user you created before shutting down the containers? Wierd right, we created a user, but it doesn't seem to be there anymore. Let's investigate what happened! In the terminal, run `docker logs app` to see the current log output of the Next app. It would apear that the table `User` is gone! Why is that?
 
-10. Lets fix the issue with the vanishing tables to mounting a volume where the database can be persisted. Do this by opening the `docker-compose.yml` file in your text editor and add the following to the `database:` section, underneath `ports:`:
+10. Lets fix the issue with the vanishing tables by mounting a volume where the database can be persisted. Do this by opening the `docker-compose.yml` file in your text editor and add the following to the `database:` section, underneath `ports:`:
 ```yaml
 volumes:
   - db-volume:/var/lib/postgresql/data
@@ -42,7 +42,10 @@ Like so:
 
 ## Optional
 If you already finished the steps above and want to try some other cool stuff:
-- Add cool hot reload capability to your local development environment using the following information:
+
+### Magical hot reload and volume binding
+Add cool hot reload capability to your local development environment using the following information:
+
 Add these lines to the `app:` section in the `docker-compose.yml` file:
 ```yaml
 volumes:
@@ -55,3 +58,14 @@ CHOKIDAR_USEPOLLING: true
 WATCHPACK_POLLING: true
 ```
 Try editing the pages now without restarting the containers, it should work like magic! 
+
+### New database, who this?
+Replace the Postgres database with a MariaDb database. 
+
+You'll have to change several things in both the `docker-compose.yml` file as well as in Prisma. More info about the MariaDb Docker image can be found here: https://hub.docker.com/_/mariadb
+
+Hints:
+- Replace the `image` part of the database container
+- Remember to also change `ports` and `environment` variables
+- Update the `DATABASE_URL` connection string in the app container
+- Update Prismas config to reflect the change of database type in `schema.prisma`
