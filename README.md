@@ -43,7 +43,7 @@ Like so:
 ## Optional
 If you already finished the steps above and want to try some other cool stuff:
 
-### Magical hot reload and volume binding
+### Magical hot reload and bind mounting
 Add cool hot reload capability to your local development environment using the following information:
 
 Add these lines to the `app:` section in the `docker-compose.yml` file:
@@ -58,6 +58,10 @@ CHOKIDAR_USEPOLLING: true
 WATCHPACK_POLLING: true
 ```
 Try editing the pages now without restarting the containers, it should work like magic! 
+
+What this does is to bind and mount the current directory on the host (signified by `.`) as a folder (in this case `/app`) inside the Docker container instead of using a volume. This way, our folder inside the Docker container will always be exactly the same as the bound folder in our host computer. Very useful if you need direct access to the underlying files that the Docker container uses. 
+
+The second part `/app/node_modules` is used to create an automatic anonymous volume by the container, in order to avoid it being potentially overridden by the `node_modules` in our bind mounted folder.
 
 ### New database, who this?
 Replace the Postgres database with a MariaDb database. 
