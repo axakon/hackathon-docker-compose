@@ -15,6 +15,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: app:local
     container_name: app
     environment:
       DATABASE_URL: postgres://postgres_user:password@database:5432/docker_hackaton_db
