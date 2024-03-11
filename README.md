@@ -36,7 +36,7 @@ Like so:
 
 ![alt text](image.png)
 
-11. Repeat steps 5 to 8, and notice that your user now remains even if you shutdown both containers.
+11. Shutdown the currently running database with `docker compose down` and then repeat steps 5 to 8, and notice that your user now remains even if you shutdown both containers.
 
 12. Congratulations, you are now an expert at using Docker Compose for local development!
 
